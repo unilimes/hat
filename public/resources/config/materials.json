@@ -1,0 +1,999 @@
+{
+  "Custom": {
+    "name": "Custom",
+    "description": "Custom description",
+    "items": [
+      {
+        "name": "Material 1",
+        "price": 10,
+        "image": {
+          "small": "textures/leather/BaseMap.jpg",
+          "full": "textures/leather/BaseMap.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 100,
+          "map": {
+            "base": "textures/leather/BaseMap.jpg",
+            "ambient": "textures/leather/AmbientOcclusionMap.png",
+            "displacement": "textures/leather/DisplacementMap.png",
+            "specular": "textures/leather/SpecularMap.png",
+            "normal": "textures/leather/NormalMap.png"
+          }
+        }
+      },
+      {
+        "name": "Material 1",
+        "price": 10,
+        "image": {
+          "small": "textures/velvet/BaseMap.jpg",
+          "full": "textures/velvet/BaseMap.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 10,
+          "map": {
+            "base": "textures/velvet/BaseMap.jpg",
+            "ambient": "textures/velvet/AmbientOcclusionMap.png",
+            "displacement": "textures/velvet/DisplacementMap.png",
+            "specular": "textures/velvet/SpecularMap.png",
+            "normal": "textures/velvet/NormalMap.png"
+          }
+        }
+      }
+    ]
+  },
+  "Sketchfab": {
+    "name": "Sketchfab",
+    "description": "Sketchfab description",
+    "items": [
+      {
+        "name": "Material 1",
+        "price": 10,
+        "image": {
+          "small": "textures/crocodile_skin_Base_Color.jpg",
+          "full": "textures/crocodile_skin_Base_Color.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/crocodile_skin_Base_Color.jpg",
+            "ambient": "textures/crocodile_skin_Ambient_Occlusion.jpg",
+            "specular": "textures/crocodile_skin_Metallic.jpg",
+            "normal": "textures/crocodile_skin_Normal.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 2",
+        "image": {
+          "small": "textures/diffuse.jpg",
+          "full": "textures/diffuse.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 50,
+          "map": {
+            "base": "textures/diffuse.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 3",
+        "image": {
+          "small": "textures/leather2.jpg",
+          "full": "textures/leather2.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 50,
+          "map": {
+            "base": "textures/leather2.jpg",
+            "bump": "textures/leather2-disp.jpg",
+            "specular": "textures/leather2-spec.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 4",
+        "image": {
+          "small": "textures/skin1.jpg",
+          "full": "textures/skin1.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 50,
+          "map": {
+            "base": "textures/skin1.jpg",
+            "bump": "textures/skin1-disp.jpg",
+            "specular": "textures/skin1-spec.jpg"
+          }
+        }
+      }
+    ]
+  },
+  "Textures": {
+    "name": "Textures",
+    "description": "Example description",
+    "items": [
+      {
+        "name": "Material 1",
+        "price": 10,
+        "image": {
+          "small": "textures/example/128-53.jpg",
+          "full": "textures/example/128-53.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/example/128-53.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 2",
+        "price": 10,
+        "image": {
+          "small": "textures/example/128-126.jpg",
+          "full": "textures/example/128-126.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/example/128-126.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 3",
+        "price": 10,
+        "image": {
+          "small": "textures/example/128-143.jpg",
+          "full": "textures/example/128-143.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/example/128-143.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 4",
+        "price": 10,
+        "image": {
+          "small": "textures/example/128-156.jpg",
+          "full": "textures/example/128-156.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/example/128-156.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 5",
+        "price": 10,
+        "image": {
+          "small": "textures/example/128-204.jpg",
+          "full": "textures/example/128-204.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/example/128-204.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 6",
+        "price": 10,
+        "image": {
+          "small": "textures/example/128-209.jpg",
+          "full": "textures/example/128-209.jpg"
+        },
+        "type": "texture",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/example/128-209.jpg"
+          }
+        }
+      }
+    ]
+  },
+  "Matcap": {
+    "name": "Matcap",
+    "description": "Matcap description",
+    "items": [
+      {
+        "name": "Lava Metall",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/frictionGlass.jpg",
+          "full": "textures/matcaps/frictionGlass.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/frictionGlass.jpg"
+          }
+        }
+      },
+      {
+        "name": "Lava Metall",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/acidGreen.jpg",
+          "full": "textures/matcaps/acidGreen.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/acidGreen.jpg"
+          }
+        }
+      },
+      {
+        "name": "Lava Metall",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/metallflame1.jpg",
+          "full": "textures/matcaps/metallflame1.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/metallflame1.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 1",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/5cad3098d01a8d232b753acad6f39972.jpg",
+          "full": "textures/matcaps/5cad3098d01a8d232b753acad6f39972.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/5cad3098d01a8d232b753acad6f39972.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 2",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/93e1bbcf77ece0c0f7fc79ecb8ff0d00.jpg",
+          "full": "textures/matcaps/93e1bbcf77ece0c0f7fc79ecb8ff0d00.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/93e1bbcf77ece0c0f7fc79ecb8ff0d00.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 3",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/767dfcbcb7cf31f984c22b042eea70cb.jpg",
+          "full": "textures/matcaps/767dfcbcb7cf31f984c22b042eea70cb.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/767dfcbcb7cf31f984c22b042eea70cb.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 4",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/944_large_remake2.jpg",
+          "full": "textures/matcaps/944_large_remake2.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/944_large_remake2.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 5",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/12719.jpg",
+          "full": "textures/matcaps/12719.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/12719.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 6",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/blu_green_litsphere_by_jujikabane.jpg",
+          "full": "textures/matcaps/blu_green_litsphere_by_jujikabane.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/blu_green_litsphere_by_jujikabane.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 7",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/bluew.jpg",
+          "full": "textures/matcaps/bluew.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/bluew.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 9",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/bluew2.jpg",
+          "full": "textures/matcaps/bluew2.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/bluew2.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 10",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/daphz1.jpg",
+          "full": "textures/matcaps/daphz1.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/daphz1.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 11",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/daphz2.jpg",
+          "full": "textures/matcaps/daphz2.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/daphz2.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 12",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/daphz3.jpg",
+          "full": "textures/matcaps/daphz3.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/daphz3.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 13",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/gooch.jpg",
+          "full": "textures/matcaps/gooch.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/gooch.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 14",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/green_glass_860.png",
+          "full": "textures/matcaps/green_glass_860.png"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/green_glass_860.png"
+          }
+        }
+      },
+      {
+        "name": "Material 15",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/jeepster_skinmat2.jpg",
+          "full": "textures/matcaps/jeepster_skinmat2.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/jeepster_skinmat2.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 16",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/joshsingh_matcap.jpg",
+          "full": "textures/matcaps/joshsingh_matcap.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/joshsingh_matcap.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 17",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_example_2.jpg",
+          "full": "textures/matcaps/litsphere_example_2.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_example_2.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 18",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_example_3.jpg",
+          "full": "textures/matcaps/litsphere_example_3.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_example_3.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 19",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_example_4.jpg",
+          "full": "textures/matcaps/litsphere_example_4.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_example_4.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 20",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_example_5.jpg",
+          "full": "textures/matcaps/litsphere_example_5.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_example_5.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 21",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_test_02.jpg",
+          "full": "textures/matcaps/litsphere_test_02.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_test_02.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 22",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_test_03.jpg",
+          "full": "textures/matcaps/litsphere_test_03.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_test_03.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 23",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_test_04.jpg",
+          "full": "textures/matcaps/litsphere_test_04.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_test_04.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 24",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/litsphere_test_05.jpg",
+          "full": "textures/matcaps/litsphere_test_05.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/litsphere_test_05.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 25",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball01.jpg",
+          "full": "textures/matcaps/matball01.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball01.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 26",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball02.jpg",
+          "full": "textures/matcaps/matball02.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball02.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 27",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball03.jpg",
+          "full": "textures/matcaps/matball03.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball03.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 28",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball04.jpg",
+          "full": "textures/matcaps/matball04.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball04.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 29",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball05.jpg",
+          "full": "textures/matcaps/matball05.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball05.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 30",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball06.jpg",
+          "full": "textures/matcaps/matball06.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball06.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 31",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/matball07.jpg",
+          "full": "textures/matcaps/matball07.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/matball07.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 32",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/metallic_red_113.png",
+          "full": "textures/matcaps/metallic_red_113.png"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/metallic_red_113.png"
+          }
+        }
+      },
+      {
+        "name": "Material 33",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/mydarkgreymetal_zbrush_matcap_by_digitalinkrod.jpg",
+          "full": "textures/matcaps/mydarkgreymetal_zbrush_matcap_by_digitalinkrod.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/mydarkgreymetal_zbrush_matcap_by_digitalinkrod.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 34",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/mygreenshinmetal_zbrush_matcap_by_digitalinkrod.jpg",
+          "full": "textures/matcaps/mygreenshinmetal_zbrush_matcap_by_digitalinkrod.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/mygreenshinmetal_zbrush_matcap_by_digitalinkrod.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 35",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/myredmetal_zbrush_matcap_by_digitalinkrod.jpg",
+          "full": "textures/matcaps/myredmetal_zbrush_matcap_by_digitalinkrod.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/myredmetal_zbrush_matcap_by_digitalinkrod.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 36",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/redsphere.jpg",
+          "full": "textures/matcaps/redsphere.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/redsphere.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 37",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/scooby_skin_mix.jpg",
+          "full": "textures/matcaps/scooby_skin_mix.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/scooby_skin_mix.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 38",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/smoothmat.jpg",
+          "full": "textures/matcaps/smoothmat.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/smoothmat.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 39",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/twilightfisheye.jpg",
+          "full": "textures/matcaps/twilightfisheye.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/twilightfisheye.jpg"
+          }
+        }
+      },
+      {
+        "name": "Material 40",
+        "price": 50,
+        "image": {
+          "small": "textures/matcaps/12719-v5.jpg",
+          "full": "textures/matcaps/12719-v5.jpg"
+        },
+        "type": "matcap",
+        "params": {
+          "color": "#ffffff",
+          "shininess": 80,
+          "map": {
+            "base": "textures/matcaps/12719-v5.jpg"
+          }
+        }
+      }
+    ]
+  },
+  "Color": {
+    "name": "Color",
+    "description": "Color description",
+    "items": [
+      {
+        "name": "Color 0",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#e1e1e1",
+          "shininess": 50
+        }
+      },
+      {
+        "name": "Color 1",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#536821",
+          "shininess": 50
+        }
+      },
+      {
+        "name": "Color 2",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#E1C54C",
+          "shininess": 50
+        }
+      },
+      {
+        "name": "Color 3",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#BC431E",
+          "shininess": 50
+        }
+      },
+      {
+        "name": "Color 4",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#76453D",
+          "shininess": 50
+        }
+      },
+      {
+        "name": "Color 5",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#C44F44",
+          "shininess": 50
+        }
+      },
+      {
+        "name": "Color 6",
+        "price": 0,
+        "image": {
+          "small": "textures/temp.jpg",
+          "full": "textures/temp.jpg"
+        },
+        "type": "color",
+        "params": {
+          "color": "#111111",
+          "shininess": 50
+        }
+      }
+    ]
+  }
+}

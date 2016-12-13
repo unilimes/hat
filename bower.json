@@ -1,0 +1,10 @@
+{
+  "name": "shaders",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^1.8.3",
+    "lodash" : "latest",
+    "device.js": "devicejs#^0.2.7",
+    "async": "^2.1.1"
+  }
+}

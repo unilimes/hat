@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>three.js webgl - OBJLoader + MTLLoader</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        body {
+            font-family: Monospace;
+            background-color: #000;
+            color: #fff;
+            margin: 0px;
+            overflow: hidden;
+        }
+
+        #info {
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display: block;
+        }
+
+        #info a, .button {
+            color: #f00;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer
+        }
+
+        .cssload-dots {
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            outline: 1px solid red;
+            filter: url(#goo);
+            -o-filter: url(#goo);
+            -ms-filter: url(#goo);
+            -webkit-filter: url(#goo);
+            -moz-filter: url(#goo);
+        }
+
+        .cssload-dot {
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .cssload-dot:before {
+            content: "";
+            width: 34px;
+            height: 34px;
+            border-radius: 49px;
+            background: rgb(251, 211, 1);
+            position: absolute;
+            left: 50%;
+            transform: translateY(0);
+            -o-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            margin-left: -17.5px;
+            margin-top: -17.5px;
+        }
+
+        .cssload-dot:nth-child(5):before {
+            z-index: 100;
+            width: 44.5px;
+            height: 44.5px;
+            margin-left: -21.75px;
+            margin-top: -21.75px;
+            animation: cssload-dot-colors 4.6s ease infinite;
+            -o-animation: cssload-dot-colors 4.6s ease infinite;
+            -ms-animation: cssload-dot-colors 4.6s ease infinite;
+            -webkit-animation: cssload-dot-colors 4.6s ease infinite;
+            -moz-animation: cssload-dot-colors 4.6s ease infinite;
+        }
+
+        .cssload-dot:nth-child(1) {
+            animation: cssload-dot-rotate-1 4.6s 0s linear infinite;
+            -o-animation: cssload-dot-rotate-1 4.6s 0s linear infinite;
+            -ms-animation: cssload-dot-rotate-1 4.6s 0s linear infinite;
+            -webkit-animation: cssload-dot-rotate-1 4.6s 0s linear infinite;
+            -moz-animation: cssload-dot-rotate-1 4.6s 0s linear infinite;
+        }
+
+        .cssload-dot:nth-child(1):before {
+            background-color: rgb(255, 50, 112);
+            animation: cssload-dot-move 4.6s 0s ease infinite;
+            -o-animation: cssload-dot-move 4.6s 0s ease infinite;
+            -ms-animation: cssload-dot-move 4.6s 0s ease infinite;
+            -webkit-animation: cssload-dot-move 4.6s 0s ease infinite;
+            -moz-animation: cssload-dot-move 4.6s 0s ease infinite;
+        }
+
+        .cssload-dot:nth-child(2) {
+            animation: cssload-dot-rotate-2 4.6s 1.15s linear infinite;
+            -o-animation: cssload-dot-rotate-2 4.6s 1.15s linear infinite;
+            -ms-animation: cssload-dot-rotate-2 4.6s 1.15s linear infinite;
+            -webkit-animation: cssload-dot-rotate-2 4.6s 1.15s linear infinite;
+            -moz-animation: cssload-dot-rotate-2 4.6s 1.15s linear infinite;
+        }
+
+        .cssload-dot:nth-child(2):before {
+            background-color: rgb(32, 139, 241);
+            animation: cssload-dot-move 4.6s 1.15s ease infinite;
+            -o-animation: cssload-dot-move 4.6s 1.15s ease infinite;
+            -ms-animation: cssload-dot-move 4.6s 1.15s ease infinite;
+            -webkit-animation: cssload-dot-move 4.6s 1.15s ease infinite;
+            -moz-animation: cssload-dot-move 4.6s 1.15s ease infinite;
+        }
+
+        .cssload-dot:nth-child(3) {
+            animation: cssload-dot-rotate-3 4.6s 2.3s linear infinite;
+            -o-animation: cssload-dot-rotate-3 4.6s 2.3s linear infinite;
+            -ms-animation: cssload-dot-rotate-3 4.6s 2.3s linear infinite;
+            -webkit-animation: cssload-dot-rotate-3 4.6s 2.3s linear infinite;
+            -moz-animation: cssload-dot-rotate-3 4.6s 2.3s linear infinite;
+        }
+
+        .cssload-dot:nth-child(3):before {
+            background-color: rgb(175, 225, 2);
+            animation: cssload-dot-move 4.6s 2.3s ease infinite;
+            -o-animation: cssload-dot-move 4.6s 2.3s ease infinite;
+            -ms-animation: cssload-dot-move 4.6s 2.3s ease infinite;
+            -webkit-animation: cssload-dot-move 4.6s 2.3s ease infinite;
+            -moz-animation: cssload-dot-move 4.6s 2.3s ease infinite;
+        }
+
+        .cssload-dot:nth-child(4) {
+            animation: cssload-dot-rotate-4 4.6s 3.45s linear infinite;
+            -o-animation: cssload-dot-rotate-4 4.6s 3.45s linear infinite;
+            -ms-animation: cssload-dot-rotate-4 4.6s 3.45s linear infinite;
+            -webkit-animation: cssload-dot-rotate-4 4.6s 3.45s linear infinite;
+            -moz-animation: cssload-dot-rotate-4 4.6s 3.45s linear infinite;
+        }
+
+        .cssload-dot:nth-child(4):before {
+            background-color: rgb(251, 211, 1);
+            animation: cssload-dot-move 4.6s 3.45s ease infinite;
+            -o-animation: cssload-dot-move 4.6s 3.45s ease infinite;
+            -ms-animation: cssload-dot-move 4.6s 3.45s ease infinite;
+            -webkit-animation: cssload-dot-move 4.6s 3.45s ease infinite;
+            -moz-animation: cssload-dot-move 4.6s 3.45s ease infinite;
+        }
+
+        @keyframes cssload-dot-move {
+            0% {
+                transform: translateY(0);
+            }
+            18%, 22% {
+                transform: translateY(-68px);
+            }
+            40%, 100% {
+                transform: translateY(0);
+            }
+        }
+
+        @-o-keyframes cssload-dot-move {
+            0% {
+                -o-transform: translateY(0);
+            }
+            18%, 22% {
+                -o-transform: translateY(-68px);
+            }
+            40%, 100% {
+                -o-transform: translateY(0);
+            }
+        }
+
+        @-ms-keyframes cssload-dot-move {
+            0% {
+                -ms-transform: translateY(0);
+            }
+            18%, 22% {
+                -ms-transform: translateY(-68px);
+            }
+            40%, 100% {
+                -ms-transform: translateY(0);
+            }
+        }
+
+        @-webkit-keyframes cssload-dot-move {
+            0% {
+                -webkit-transform: translateY(0);
+            }
+            18%, 22% {
+                -webkit-transform: translateY(-68px);
+            }
+            40%, 100% {
+                -webkit-transform: translateY(0);
+            }
+        }
+
+        @-moz-keyframes cssload-dot-move {
+            0% {
+                -moz-transform: translateY(0);
+            }
+            18%, 22% {
+                -moz-transform: translateY(-68px);
+            }
+            40%, 100% {
+                -moz-transform: translateY(0);
+            }
+        }
+
+        @keyframes cssload-dot-colors {
+            0% {
+                background-color: rgb(251, 211, 1);
+            }
+            25% {
+                background-color: rgb(255, 50, 112);
+            }
+            50% {
+                background-color: rgb(32, 139, 241);
+            }
+            75% {
+                background-color: rgb(175, 225, 2);
+            }
+            100% {
+                background-color: rgb(251, 211, 1);
+            }
+        }
+
+        @-o-keyframes cssload-dot-colors {
+            0% {
+                background-color: rgb(251, 211, 1);
+            }
+            25% {
+                background-color: rgb(255, 50, 112);
+            }
+            50% {
+                background-color: rgb(32, 139, 241);
+            }
+            75% {
+                background-color: rgb(175, 225, 2);
+            }
+            100% {
+                background-color: rgb(251, 211, 1);
+            }
+        }
+
+        @-ms-keyframes cssload-dot-colors {
+            0% {
+                background-color: rgb(251, 211, 1);
+            }
+            25% {
+                background-color: rgb(255, 50, 112);
+            }
+            50% {
+                background-color: rgb(32, 139, 241);
+            }
+            75% {
+                background-color: rgb(175, 225, 2);
+            }
+            100% {
+                background-color: rgb(251, 211, 1);
+            }
+        }
+
+        @-webkit-keyframes cssload-dot-colors {
+            0% {
+                background-color: rgb(251, 211, 1);
+            }
+            25% {
+                background-color: rgb(255, 50, 112);
+            }
+            50% {
+                background-color: rgb(32, 139, 241);
+            }
+            75% {
+                background-color: rgb(175, 225, 2);
+            }
+            100% {
+                background-color: rgb(251, 211, 1);
+            }
+        }
+
+        @-moz-keyframes cssload-dot-colors {
+            0% {
+                background-color: rgb(251, 211, 1);
+            }
+            25% {
+                background-color: rgb(255, 50, 112);
+            }
+            50% {
+                background-color: rgb(32, 139, 241);
+            }
+            75% {
+                background-color: rgb(175, 225, 2);
+            }
+            100% {
+                background-color: rgb(251, 211, 1);
+            }
+        }
+
+        @keyframes cssload-dot-rotate-1 {
+            0% {
+                transform: rotate(-105deg);
+            }
+            100% {
+                transform: rotate(270deg);
+            }
+        }
+
+        @-o-keyframes cssload-dot-rotate-1 {
+            0% {
+                -o-transform: rotate(-105deg);
+            }
+            100% {
+                -o-transform: rotate(270deg);
+            }
+        }
+
+        @-ms-keyframes cssload-dot-rotate-1 {
+            0% {
+                -ms-transform: rotate(-105deg);
+            }
+            100% {
+                -ms-transform: rotate(270deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-dot-rotate-1 {
+            0% {
+                -webkit-transform: rotate(-105deg);
+            }
+            100% {
+                -webkit-transform: rotate(270deg);
+            }
+        }
+
+        @-moz-keyframes cssload-dot-rotate-1 {
+            0% {
+                -moz-transform: rotate(-105deg);
+            }
+            100% {
+                -moz-transform: rotate(270deg);
+            }
+        }
+
+        @keyframes cssload-dot-rotate-2 {
+            0% {
+                transform: rotate(165deg);
+            }
+            100% {
+                transform: rotate(540deg);
+            }
+        }
+
+        @-o-keyframes cssload-dot-rotate-2 {
+            0% {
+                -o-transform: rotate(165deg);
+            }
+            100% {
+                -o-transform: rotate(540deg);
+            }
+        }
+
+        @-ms-keyframes cssload-dot-rotate-2 {
+            0% {
+                -ms-transform: rotate(165deg);
+            }
+            100% {
+                -ms-transform: rotate(540deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-dot-rotate-2 {
+            0% {
+                -webkit-transform: rotate(165deg);
+            }
+            100% {
+                -webkit-transform: rotate(540deg);
+            }
+        }
+
+        @-moz-keyframes cssload-dot-rotate-2 {
+            0% {
+                -moz-transform: rotate(165deg);
+            }
+            100% {
+                -moz-transform: rotate(540deg);
+            }
+        }
+
+        @keyframes cssload-dot-rotate-3 {
+            0% {
+                transform: rotate(435deg);
+            }
+            100% {
+                transform: rotate(810deg);
+            }
+        }
+
+        @-o-keyframes cssload-dot-rotate-3 {
+            0% {
+                -o-transform: rotate(435deg);
+            }
+            100% {
+                -o-transform: rotate(810deg);
+            }
+        }
+
+        @-ms-keyframes cssload-dot-rotate-3 {
+            0% {
+                -ms-transform: rotate(435deg);
+            }
+            100% {
+                -ms-transform: rotate(810deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-dot-rotate-3 {
+            0% {
+                -webkit-transform: rotate(435deg);
+            }
+            100% {
+                -webkit-transform: rotate(810deg);
+            }
+        }
+
+        @-moz-keyframes cssload-dot-rotate-3 {
+            0% {
+                -moz-transform: rotate(435deg);
+            }
+            100% {
+                -moz-transform: rotate(810deg);
+            }
+        }
+
+        @keyframes cssload-dot-rotate-4 {
+            0% {
+                transform: rotate(705deg);
+            }
+            100% {
+                transform: rotate(1080deg);
+            }
+        }
+
+        @-o-keyframes cssload-dot-rotate-4 {
+            0% {
+                -o-transform: rotate(705deg);
+            }
+            100% {
+                -o-transform: rotate(1080deg);
+            }
+        }
+
+        @-ms-keyframes cssload-dot-rotate-4 {
+            0% {
+                -ms-transform: rotate(705deg);
+            }
+            100% {
+                -ms-transform: rotate(1080deg);
+            }
+        }
+
+        @-webkit-keyframes cssload-dot-rotate-4 {
+            0% {
+                -webkit-transform: rotate(705deg);
+            }
+            100% {
+                -webkit-transform: rotate(1080deg);
+            }
+        }
+
+        @-moz-keyframes cssload-dot-rotate-4 {
+            0% {
+                -moz-transform: rotate(705deg);
+            }
+            100% {
+                -moz-transform: rotate(1080deg);
+            }
+        }
+
+        #preloader {
+            position: absolute;
+            background: #fff;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="preloader">
+    <div class="cssload-dots">
+        <div class="cssload-dot"></div>
+        <div class="cssload-dot"></div>
+        <div class="cssload-dot"></div>
+        <div class="cssload-dot"></div>
+        <div class="cssload-dot"></div>
+    </div>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="12"></feGaussianBlur>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0	0 1 0 0 0	0 0 1 0 0	0 0 0 18 -7"
+                               result="goo"></feColorMatrix>
+                <!--<feBlend in2="goo" in="SourceGraphic" result="mix" ></feBlend>-->
+            </filter>
+        </defs>
+    </svg>
+</div>
+
+<script src="libs/three.js"></script>
+<!--<script src="libs/BufferSubdivisionModifier.js"></script>-->
+<script src="libs/OrbitControls.js"></script>
+<script src="libs/TGALoader.js"></script>
+
+<script src="libs/DDSLoader.js"></script>
+<script src="libs/MTLLoader.js"></script>
+<script src="libs/OBJLoader.js"></script>
+
+<script src="libs/Detector.js"></script>
+<script src="libs/stats.min.js"></script>
+<script src="libs/dat.gui.min.js"></script>
+
+<script>
+
+    var container, stats;
+
+    var camera, scene, renderer, controls;
+
+    var mouseX = 0, mouseY = 0;
+
+    var windowHalfX = window.innerWidth / 2;
+    var windowHalfY = window.innerHeight / 2;
+
+
+    init();
+    animate();
+
+
+    function init() {
+
+        container = document.createElement('div');
+        document.body.appendChild(container);
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 20000);
+        camera.position.set(-1000, 1000, 1000);
+
+        // scene
+
+        scene = new THREE.Scene();
+
+//        scene.fog = new THREE.Fog( 0xffffff, 1, 5000 );
+//        scene.fog.color.setHSL( 0.6, 0, 1 );
+
+        var ambient = new THREE.AmbientLight(0xffffff);
+//        scene.add( ambient );
+
+//        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+//        directionalLight.position.set( 0, 0, 1 ).normalize();
+//        directionalLight.castShadow = true;
+//        scene.add( directionalLight );
+        // lights
+
+//        var light = new THREE.DirectionalLight( 0xffffff,0.2 );
+//        light.position.set( 1, 1, 1 );
+//        light.castShadow = true;
+//        scene.add( light );
+
+        var spotLight = new THREE.SpotLight(0xffffff, 0.82);
+        var lightHelper;
+//        spotLight.position.set(1141,);
+        spotLight.lookAt(scene.position)
+        spotLight.position.y = 1000;
+
+//        spotLight.angle = 1.6;
+        spotLight.penumbra = 0.05;
+        spotLight.decay = 2;
+        spotLight.distance = 1000;
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        spotLight.shadow.camera.near = 1;
+        spotLight.shadow.camera.far = 20000;
+        lightHelper = new THREE.SpotLightHelper(spotLight);
+//        scene.add( lightHelper );
+        scene.add(spotLight);
+
+        var spotLight = new THREE.SpotLight(0xffffff, 1.42);
+        spotLight.position.set(-1000,-889,1000);
+        spotLight.angle = 1.6;
+        spotLight.penumbra = 0.05;
+        spotLight.decay = 2;
+//        spotLight.castShadow = true;
+        spotLight.distance = 3000;
+        scene.add(spotLight);
+        var spotLight = new THREE.SpotLight(0xffffff, 1.42);
+        spotLight.position.copy(camera.position);
+        spotLight.angle = 1.6;
+        spotLight.penumbra = 0.05;
+        spotLight.decay = 2;
+        spotLight.castShadow = true;
+        spotLight.distance = 3000;
+        scene.add(spotLight);
+
+
+        var pointLight = new THREE.PointLight( 0xffffff, 1, 30 );
+
+        pointLight.position.set( -1, 1, 1 );
+//        pointLight.castShadow = true;
+//        pointLight.shadow.camera.near = 1;
+//        pointLight.shadow.camera.far = 30;
+        // pointLight.shadowCameraVisible = true;
+//        pointLight.shadow.bias = 0.01;
+        var geometry = new THREE.SphereGeometry( 10, 12, 6 );
+        var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+        var sphere = new THREE.Mesh( geometry, material );
+        pointLight.add( sphere );
+//        scene.add( pointLight );
+
+//        light = new THREE.AmbientLight( 0x222222 );
+//        scene.add( light );
+        var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.06);
+//        hemiLight.color.setHSL( 1., 1., 1. );
+//        hemiLight.groundColor.setHSL( 1., 1., 1. );
+        hemiLight.position.set(500, 500, 0);
+        scene.add(hemiLight);
+
+
+        // model
+
+        var onProgress = function (xhr) {
+            if (xhr.lengthComputable) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(Math.round(percentComplete, 2) + '% downloaded');
+            }
+        };
+
+        var onError = function (xhr) {
+        };
+
+        THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+//        THREE.Loader.Handlers.add( /\.tga$/i, new THREE.TGALoader() );
+
+        var model_url = 'models/sliapa_/';
+        var nameModel = '_OBJ';
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath(model_url);
+        mtlLoader.load(nameModel + '.mtl', function (materials) {
+
+            materials.preload();
+
+
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.setPath(model_url);
+            objLoader.load(nameModel + '.obj', function (object) {
+                var text = {
+                    roughness: 1.0,
+                    metalness: 0.,
+                    aoMapIntensity: 1.,
+                    spotLight: 2.8,
+                    hemiLight: 0.6,
+                    spotLightx:spotLight.position.x,
+                    spotLighty:spotLight.position.y,
+                    spotLightz:spotLight.position.z,
+                };
+                var gui = new dat.GUI({width: 460});
+                gui.add(text, 'roughness', -10, 10).onChange(function () {
+                    mesh1.material.roughness = text.roughness;
+                    mesh2.material.roughness = text.roughness;
+                });
+                gui.add(text, 'metalness', -10, 10).onChange(function () {
+                    mesh1.material.metalness = text.metalness;
+                    mesh2.material.metalness = text.metalness;
+                });
+                gui.add(text, 'aoMapIntensity', -10, 10).onChange(function () {
+                    mesh1.material.aoMapIntensity = text.aoMapIntensity;
+                    mesh2.material.aoMapIntensity = text.aoMapIntensity;
+                });
+                gui.add(text, 'spotLight', 0, 10).onChange(function () {
+                    spotLight.intensity = text.spotLight;
+                });
+                gui.add(text, 'hemiLight', 0, 10).onChange(function () {
+                    hemiLight.intensity = text.hemiLight;
+                });
+                gui.add(text, 'spotLighty', -10000, 10000).onChange(function () {
+                    spotLight.position.y = text.spotLighty;
+                });
+                gui.add(text, 'spotLightx', -10000, 10000).onChange(function () {
+                    spotLight.position.x = text.spotLightx;
+                });
+                gui.add(text, 'spotLightz', -10000, 10000).onChange(function () {
+                    spotLight.position.z = text.spotLightz;
+                });
+                var mesh1 = object.getObjectByName('Symmetry_1_1');
+                var _c1 = mesh1.material.color,
+                        loaderText = new THREE.TextureLoader();
+                mesh1.material = new THREE.MeshStandardMaterial({
+                    map: loaderText.load(model_url + 'Collor_2.jpg'),
+                    normalMap: loaderText.load(model_url + 'Normal_2.jpg'),
+                    bumpMap: loaderText.load(model_url + 'Normal_2.jpg'),
+                    roughnessMap: loaderText.load(model_url + 'Gloss_2_inverted.png'),
+                    metalnessMap: loaderText.load(model_url + 'Metall_2.jpg'),
+                    aoMap: loaderText.load(model_url + 'Collor_1.jpg'),
+                    roughness: text.roughness,
+                    metalness: text.metalness,
+                    aoMapIntensity: text.aoMapIntensity,
+                    normalScale: new THREE.Vector2(1.0, 1.0)
+                });
+
+                var mesh2 = object.getObjectByName('Default_1_1_1_2');
+
+                var _c2 = mesh2.material.color;
+                mesh2.material = new THREE.MeshStandardMaterial({
+                    map: loaderText.load(model_url + 'Collor_1.jpg'),
+                    emissiveMap : loaderText.load(model_url + 'Normal_1.jpg'),
+                    bumpMap : loaderText.load(model_url + 'Normal_1.jpg'),
+                    normalMap: loaderText.load(model_url + 'Normal_1.jpg'),
+                    roughnessMap: loaderText.load(model_url + 'Gloss_1_inverted.png'),
+                    metalnessMap: loaderText.load(model_url + 'Metall_1.jpg'),
+                    aoMap: loaderText.load(model_url + 'Collor_1.jpg'),
+                    roughness: text.roughness,
+                    metalness: text.metalness,
+                    aoMapIntensity: text.aoMapIntensity,
+                    normalScale: new THREE.Vector2(1.0, 1.0)
+                });
+
+//                THREE.ShaderLib["basic"].fragmentShader = basicFragmentShader(false);
+                var floor = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000, 1000), new THREE.MeshPhongMaterial({side: THREE.BackSide}));
+                floor.receiveShadow = true;
+                floor.rotation.x = Math.PI / 2;
+
+//                mesh2.receiveShadow = true;
+                mesh2.castShadow = true;
+//                mesh1.receiveShadow = true;
+                mesh1.castShadow = true;
+//                scene.add(floor);
+                scene.add(object);
+
+                var elem = document.querySelector('#preloader').style;
+                var opacity = 1;
+//                elem.transparent = 't';
+                var inter = setInterval(function(){
+                    if(opacity  <=0){
+                        clearInterval(inter);
+                        elem.display = 'none';
+                    }else{
+                        elem.opacity = opacity-=0.05;
+                    }
+
+                },100);
+
+            }, onProgress, onError);
+
+        });
+
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true
+            , transparent: true, alpha: true, preserveDrawingBuffer: true, logarithmicDepthBuffer: true
+        });
+        renderer.setClearColor(0xdcdcdc);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+//        renderer.shadowMap.enabled = true;
+//        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        renderer.gammaInput = true;
+        renderer.gammaOutput = true;
+
+        container.appendChild(renderer.domElement);
+
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.25;
+        controls.minDistance = 500;
+        controls.maxDistance = 1200;
+//        controls.enableZoom = false;
+        //
+
+        window.addEventListener('resize', onWindowResize, false);
+
+    }
+
+    function onWindowResize() {
+
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+    }
+
+    function onDocumentMouseMove(event) {
+
+        mouseX = ( event.clientX - windowHalfX ) / 2;
+        mouseY = ( event.clientY - windowHalfY ) / 2;
+
+    }
+
+    //
+
+    function animate() {
+
+        requestAnimationFrame(animate);
+        render();
+
+    }
+
+    function render() {
+        controls.update();
+
+        renderer.render(scene, camera);
+
+    }
+
+</script>
+
+</body>
+</html>
