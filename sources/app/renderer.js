@@ -5,16 +5,16 @@ import CanvasApi from './canvas-api.js';
 
 class Renderer {
     /*@ngInject*/
-    constructor($scope) {
+    constructor( AppContainerID ) {
 
         var self = this;
 
         this.hash = (window.location.hash.replace('#', '') !== '') ? window.location.hash.replace('#', '') : 'sliapa';
         this.path = 'resources/model/' + this.hash + "/";
 
-        this.$container = $('#' + $scope);
-        this.container = document.getElementById( $scope );
-        this.$scope = $scope;
+        this.$container = $( '#' + AppContainerID );
+        this.container = document.getElementById( AppContainerID );
+        this.AppContainerID = AppContainerID;
 
         this.CanvasApi = new CanvasApi();
 
@@ -30,7 +30,7 @@ class Renderer {
         this.intersectsObjects = [];
         this.config = { size: 0 };
 
-        this.app = new Zegla('three_container');
+        this.app = new Zegla( AppContainerID );
 
         this.textureConfig = {
             roughness: 1.0,
@@ -155,12 +155,17 @@ class Renderer {
             };
 
             return new FontList();
+
         })();
 
         this.fontFace = this.fontsList.get().filename;
         this.fontFaceName = this.fontsList.get().name;
 
         this.run();
+    }
+
+    resetScene(){
+        this.app.clearScene();
     }
 
     run () {
@@ -172,7 +177,6 @@ class Renderer {
             this.preloadFont();
             this.iniGUI();
         });
-
     }
 
     preloadConfig(callback) {
@@ -291,8 +295,12 @@ class Renderer {
             }
 
             if(val !== 0){
-                window.location.hash = val;
-                window.location.reload();
+                this.resetScene();
+                window.location.hash = this.hash = val;
+                this.path = 'resources/model/' + this.hash + "/";
+                this.ModelScript = require('../../public/resources/model/' + this.hash + '/script.js').ModelScript;
+                this.preloadModel();
+                //window.location.reload();
             }
 
         });
@@ -342,7 +350,19 @@ class Renderer {
                 callback( obj );
             }, ()=>{}, ()=>{} );
         }
-        this.mScript = new this.ModelScript( this, loadMaterials, loadObject );
+        this.mScript = new this.ModelScript( this, loadMaterials, loadObject, ( obj ) => {
+            this.app._scene.add( obj );
+            this.app.controls.update();
+            _.each( obj.children, ( child ) => {
+                //child.material = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+                this.intersectsObjects.push( child );
+                if( child.geometry.vertices ){
+                    child.geometry = new THREE.Geometry().fromBufferGeometry( child.geometry );
+                }
+                child.dragThis = false;
+                this.iniObjectEvents( child );
+            });
+        });
 
     }
 
@@ -352,18 +372,15 @@ class Renderer {
             $('#fileInput').click();
         };
 
+        $('#clearScene').click(() => {
+            this.resetScene();
+        });
+
         // List available models in DOM
         _.each( this.modelsList, function( nextModel ){
             var nextOption = $('<option value="' + nextModel.val + '">' + nextModel.name + '</option>');
             $('#selectModel').append( nextOption );
         });
-
-        // List available fonts in DOM
-        //console.log( this.fontsList );
-        //_.each( this.fontsList.getParams(), function( nextFont ){
-        //    var nextOption = $('<option value="' + nextFont.name + '">' + nextFont.name + '</option>');
-        //    $('#fontChoose').append( nextOption );
-        //});
 
         var fileInput = document.getElementById("fileInput");
         fileInput.addEventListener('change', () => {
@@ -392,8 +409,8 @@ class Renderer {
         var self = this;
 
         var textTextureNormal = this.textureLoader.load('resources/textures/tkan1/normal.png');
-        textTextureNormal.wrapS = textTextureNormal.wrapT = THREE.RepeatWrapping;
-        textTextureNormal.repeat.set( 0.1, 0.1 );
+            textTextureNormal.wrapS = textTextureNormal.wrapT = THREE.RepeatWrapping;
+            textTextureNormal.repeat.set( 0.1, 0.1 );
 
         this.textMaterial = new THREE.MeshPhongMaterial({
             //map: textTexture,

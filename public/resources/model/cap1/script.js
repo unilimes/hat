@@ -1,19 +1,9 @@
 export class ModelScript {
-    constructor( Renderer, loadMaterials, loadObject  ) {
-
-        console.log( Renderer );
-
+    constructor( Renderer, loadMaterials, loadObject, callback ) {
         loadMaterials(( materials ) => {
             loadObject(( obj )=>{
-                Renderer.app.scene.add( obj );
-                console.log( obj );
-                Renderer.app.controls.update();
-                Renderer.intersectsObjects.push( obj.children[0] );
-                obj.children[0].dragThis = false;
-                obj.children[0].geometry = new THREE.Geometry().fromBufferGeometry( obj.children[0].geometry );
-                Renderer.iniObjectEvents( obj.children[0] );
+                if( callback )  callback( obj );
             }, materials );
         });
-
     }
 }

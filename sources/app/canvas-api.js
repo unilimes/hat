@@ -5,7 +5,7 @@ class CanvasApi {
         this.context = this.canvas.getContext('2d');
 
         this.options = {
-            text: 'a         b        c          d',
+            text: 'My test text',
             color: '#cccccc',
             "stroke-color" : '',
             stroke : false,

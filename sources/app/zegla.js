@@ -11,7 +11,12 @@ class Zegla {
     this._.Instruction = Instruction;
     this.Animations = new Instruction();
     this.scene = new THREE.Scene();
+    this._scene = new THREE.Object3D();
+    this.scene.add( this._scene );
     this.frame = 0;
+    this.stats = new Stats();
+    this.stats.showPanel( 0 );
+    console.log( this.stats );
 
     // inits
     this.iniView();
@@ -48,9 +53,12 @@ class Zegla {
   }
 
   onFrame(){
+    this.stats.begin();
     this.frame++;
     this.gl.render(this.scene, this.camera);
     this.Animations.run();
+    document.body.appendChild( this.stats.dom );
+    this.stats.end();
   }
 
   iniAnimations(){
@@ -149,6 +157,66 @@ class Zegla {
     this.controls.enableZoom = true;
     this.controls.minDistance = 0.3;
     this.controls.maxDistance = 11110.3;
+  }
+
+  deepMapper( scene ){
+
+    scene.deep = 0;
+
+    var responseProto = function(){
+      this.map = []; this.map[0] = [];
+      this.stack = [];
+      this.count = 0;
+      this.traverseUp = function( callback ){
+        for( var i = this.map.length; i > 0; i-- ){
+          for(var n = this.map[i-1].length; n > 0; n--){
+            if(callback) callback( this.map[i-1][n-1] );
+          }
+        }
+      };
+    };
+
+    var response = new responseProto();
+
+    var Map = response.map;
+    var Stack = response.stack;
+    function deep_marker_childs( obj ){
+      for( var i = 0; i < obj.children.length; i++ ){
+        obj.children[i].deep = obj.deep+1;
+        if(!Map[ obj.children[i].deep ]) Map[ obj.children[i].deep ] = [];
+        Map[ obj.children[i].deep ].push( obj.children[i] );
+        Stack.push( obj.children[i] );
+        deep_marker_childs( obj.children[i] );
+      }
+    }
+    deep_marker_childs( scene );
+    return response;
+  }
+
+
+  clearScene(){
+
+    let sceneMap = this.deepMapper( this._scene );
+
+    console.log( sceneMap );
+
+    sceneMap.traverseUp(( child ) => {
+      if( child.material && child.material.map ) child.material.map.dispose();
+      if( child.material ) {
+        if( child.material.dispose ){
+          child.material.dispose();
+        } else {
+          if( child.material.materials ){
+            for( let i = 0; i < child.material.materials.length; i++ ){
+              if( child.material.materials[i].map ) child.material.materials[i].map.dispose();
+              if( child.material.materials[i] ) child.material.materials[i].dispose();
+            }
+          }
+        }
+      }
+      if( child.geometry) child.geometry.dispose();
+      child.parent.remove( child );
+    });
   }
 
 }
